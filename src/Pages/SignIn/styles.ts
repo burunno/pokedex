@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { shade } from 'polished';
 
 import charizardLogo from '../../assets/images/charizard.svg';
@@ -15,8 +15,28 @@ export const Content = styled.div`
   place-content: center;
   align-items: center;
 
-  width: 100%;
+  width: 40%;
   max-width: 900px;
+`;
+
+const appearFromLeft = keyframes`
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity:1;
+    transform: translateX(0);
+  }
+`;
+
+export const AnimationContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  place-content: center;
+  align-items: center;
+
+  animation: ${appearFromLeft} 1s;
 
   img {
     width: 100px;
@@ -61,6 +81,7 @@ export const Header = styled.div`
 
     h1 {
       margin-left: 20px;
+      font-family: Montserrat, sans-serif;
     }
   }
 `;
