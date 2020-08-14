@@ -7,23 +7,23 @@ Find your favorites pokemons and add then to your pokedex
 This API is required to perform valid logins and registrations
 
 
-clone repo
+**clone repo**
 ```
 git clone https://github.com/burunno/api-users
 ```
 
-install dependencies and run
+**install dependencies and run**
 ```
 yarn && yarn start
 ```
 
 - Application
 
-clone repo
+**clone repo**
 ```
 git clone https://github.com/burunno/pokedex.git
 ```
-install dependencies and run
+**install dependencies and run**
 ```
 yarn && yarn start
 ```
