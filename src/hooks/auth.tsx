@@ -37,12 +37,13 @@ export const AuthProvider: React.FC = ({ children }) => {
       password,
     });
 
+    const { token } = response.data;
+
     const {
-      token,
       email: user_email,
       password: user_password,
       name,
-    } = response.data;
+    } = response.data.user;
 
     const user = {
       name,

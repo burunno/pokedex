@@ -17,6 +17,7 @@ import pokeballLogo from '../../assets/images/pokeball.svg';
 
 import getValidationErrors from '../../utils/getValidationErrors';
 import { usersAPI } from '../../services/api';
+import { useToast } from '../../hooks/toasts';
 
 import Input from '../../components/Input';
 import Button from '../../components/Button';
@@ -28,6 +29,7 @@ interface SignUpProps {
 
 const SignUp: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
+  const { addToast } = useToast();
   const history = useHistory();
 
   const handleSubmit = useCallback(
@@ -54,14 +56,30 @@ const SignUp: React.FC = () => {
 
         await usersAPI.post('/users', data);
 
+        addToast({
+          type: 'success',
+          title: 'Cadastro realizado.',
+          description: 'Você já pode fazer seu login',
+        });
+
         history.push('/');
       } catch (error) {
-        const errors = getValidationErrors(error);
+        if (error instanceof Yup.ValidationError) {
+          const errors = getValidationErrors(error);
 
-        formRef.current?.setErrors(errors);
+          formRef.current?.setErrors(errors);
+
+          return;
+        }
+
+        addToast({
+          type: 'error',
+          title: 'Erro no cadastro',
+          description: 'Ocorreu um erro no cadastro, tente novamente.',
+        });
       }
     },
-    [history],
+    [history, addToast],
   );
 
   return (
