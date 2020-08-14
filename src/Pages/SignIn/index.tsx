@@ -20,32 +20,57 @@ import Input from '../../components/Input';
 import Button from '../../components/Button';
 
 import getValidationErrors from '../../utils/getValidationErrors';
+import { useAuth } from '../../hooks/auth';
+import { useToast } from '../../hooks/toasts';
+
+interface SignInFormProps {
+  email: string;
+  password: string;
+}
 
 const SignIn: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
 
-  const handleSubmit = useCallback(async (data: any) => {
-    try {
-      formRef.current?.setErrors({});
+  const { signIn } = useAuth();
+  const { addToast } = useToast();
 
-      const schema = Yup.object().shape({
-        email: Yup.string().required('Insira seu e-mail.').email(),
-        password: Yup.string().required('Insira sua senha'),
-      });
+  const handleSubmit = useCallback(
+    async (data: SignInFormProps) => {
+      try {
+        formRef.current?.setErrors({});
 
-      await schema.validate(data, {
-        abortEarly: false,
-      });
+        const schema = Yup.object().shape({
+          email: Yup.string().required('Insira seu e-mail.').email(),
+          password: Yup.string().required('Insira sua senha'),
+        });
 
-      // sessionStorage.setItem('user')
-    } catch (error) {
-      const errors = getValidationErrors(error);
+        await schema.validate(data, {
+          abortEarly: false,
+        });
 
-      formRef.current?.setErrors(errors);
+        await signIn({
+          email: data.email,
+          password: data.password,
+        });
+      } catch (error) {
+        if (error instanceof Yup.ValidationError) {
+          const errors = getValidationErrors(error);
 
-      return;
-    }
-  }, []);
+          formRef.current?.setErrors(errors);
+
+          return;
+        }
+
+        addToast({
+          type: 'error',
+          title: 'Erro na autenticação',
+          description:
+            'Ocorreu um erro ao fazer o login, cheque as credenciais',
+        });
+      }
+    },
+    [signIn, addToast],
+  );
 
   return (
     <Container>
@@ -69,9 +94,7 @@ const SignIn: React.FC = () => {
               type="password"
             />
 
-            <Link to="/main">
-              <Button type="submit">Entrar</Button>
-            </Link>
+            <Button type="submit">Entrar</Button>
           </Form>
 
           <Link to="/sign-up">

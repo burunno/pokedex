@@ -17,20 +17,13 @@ interface IProps extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 const Input: React.FC<IProps> = ({ name, icon: Icon, ...rest }) => {
-  const [isFocused, setIsFocused] = useState(false);
   const [isFilled, setIsFilled] = useState(false);
 
   const { fieldName, error, registerField } = useField(name);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleInputBlur = useCallback(() => {
-    setIsFocused(false);
-
     setIsFilled(!!inputRef.current?.value);
-  }, []);
-
-  const handleInputFocus = useCallback(() => {
-    setIsFocused(true);
   }, []);
 
   useEffect(() => {
@@ -42,14 +35,9 @@ const Input: React.FC<IProps> = ({ name, icon: Icon, ...rest }) => {
   }, [fieldName, registerField]);
 
   return (
-    <Container isErrored={!!error} isFilled={isFilled} isFocused={isFocused}>
+    <Container isErrored={!!error} isFilled={isFilled}>
       {Icon && <Icon size={20} />}
-      <input
-        onFocus={handleInputFocus}
-        onBlur={handleInputBlur}
-        ref={inputRef}
-        {...rest}
-      />
+      <input onBlur={handleInputBlur} ref={inputRef} {...rest} />
       {error && (
         <Error title={error}>
           <FiAlertCircle color="#f8512d" size={20} />
