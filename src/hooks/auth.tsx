@@ -1,20 +1,25 @@
 import React, { createContext, useCallback, useState, useContext } from 'react';
 import { usersAPI } from '../services/api';
 
+interface UserProps {
+  id: string;
+  name: string;
+}
+
 interface SignInProps {
   email: string;
   password: string;
 }
 
 interface IProps {
-  user: any;
+  user: UserProps;
   signIn(credentials: SignInProps): Promise<void>;
   signOut(): void;
 }
 
 interface AuthState {
   token: string;
-  user: any;
+  user: UserProps;
 }
 
 const AuthContext = createContext<IProps>({} as IProps);
@@ -40,12 +45,14 @@ export const AuthProvider: React.FC = ({ children }) => {
     const { token } = response.data;
 
     const {
+      _id: id,
       email: user_email,
       password: user_password,
       name,
     } = response.data.user;
 
     const user = {
+      id,
       name,
       email: user_email,
       password: user_password,
