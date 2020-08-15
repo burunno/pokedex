@@ -5,15 +5,13 @@ import { Container } from './styles';
 interface CardProps {
   name: string;
   type: string;
+  avatar: string;
 }
 
-const Card: React.FC<CardProps> = ({ name, type }) => {
+const Card: React.FC<CardProps> = ({ name, type, avatar }) => {
   return (
     <Container>
-      <img
-        src="https://avatars3.githubusercontent.com/u/38473461?s=460&u=fff1427e55c79305b0b4dddbc2f621c8c7b841ad&v=4"
-        alt="avatar"
-      />
+      <img src={avatar} alt="avatar" />
       <strong>{name}</strong>
       <span>{type}</span>
     </Container>

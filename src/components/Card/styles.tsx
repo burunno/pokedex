@@ -10,6 +10,8 @@ export const Container = styled.div`
   border-radius: 10px;
   box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
   margin-right: 15px;
+  margin-bottom: 15px;
+  position: relative;
 
   img {
     width: 150px;

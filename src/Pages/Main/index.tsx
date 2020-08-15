@@ -18,6 +18,7 @@ import { useToast } from '../../hooks/toasts';
 import { PokeAPI } from '../../services/api';
 
 import Card from '../../components/Card';
+import { AnyPtrRecord } from 'dns';
 
 interface PokeProps {
   id: number;
@@ -32,23 +33,36 @@ const Main: React.FC = () => {
 
   const { addToast } = useToast();
 
-  const onChange = (event: any) => {
-    setSearch(event?.target.value);
-  };
-
   const handleSearch = async () => {
+    setSearch('');
+
     try {
       const response = await PokeAPI.get(`${search}`);
+      const pokeType: string = response.data.types[0].type.name;
 
-      const poke: PokeProps = {
-        id: response.data.id,
-        name: response.data.name,
-        avatar: response.data.sprites.front_default,
-        type: response.data.types[0].type.name,
-      };
+      const pokemonExists = pokemons.find(
+        pokemon => pokemon.name === response.data.name,
+      );
 
-      setPokemons({ ...pokemons, ...poke });
-      console.log(pokemons);
+      if (pokemonExists) {
+        addToast({
+          type: 'error',
+          title: 'Erro ao adicionar o Pokemon',
+          description: 'Pokemon já adicionado',
+        });
+
+        return;
+      }
+
+      setPokemons([
+        ...pokemons,
+        {
+          id: response.data.id,
+          name: response.data.name,
+          avatar: response.data.sprites.front_default,
+          type: pokeType,
+        },
+      ]);
 
       addToast({
         type: 'success',
@@ -83,7 +97,8 @@ const Main: React.FC = () => {
       <Content>
         <Search>
           <input
-            onChange={event => onChange(event)}
+            value={search}
+            onChange={event => setSearch(event?.target.value)}
             placeholder="Pesquise um Pokemon"
           />
           <button type="button" onClick={handleSearch}>
@@ -91,7 +106,14 @@ const Main: React.FC = () => {
           </button>
         </Search>
         <Body>
-          <Card type="elétrico" name="Pikachu" />
+          {pokemons.map(pokemon => (
+            <Card
+              key={pokemon.id}
+              name={pokemon.name}
+              avatar={pokemon.avatar}
+              type={pokemon.type}
+            />
+          ))}
         </Body>
       </Content>
     </Container>

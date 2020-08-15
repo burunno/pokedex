@@ -44,7 +44,7 @@ export const Profile = styled.div`
 
 export const Content = styled.main`
   max-width: 1120px;
-  margin: 64px auto;
+  margin: 20px auto;
   align-items: center;
   justify-content: center;
   display: flex;
@@ -59,7 +59,6 @@ export const Search = styled.div`
   border-radius: 10px;
   box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
   padding: 10px;
-  position: absolute;
   top: 20%;
 
   button {
@@ -91,10 +90,15 @@ export const Search = styled.div`
 
 export const Body = styled.div`
   display: flex;
-  width: 95%;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  width: 100%;
+  height: 100%;
   padding: 15px;
   border-radius: 10px;
   box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
   margin-top: 20px;
-  bottom: 5%;
 `;
