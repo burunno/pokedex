@@ -23,10 +23,7 @@ import getValidationErrors from '../../utils/getValidationErrors';
 import { useAuth } from '../../hooks/auth';
 import { useToast } from '../../hooks/toasts';
 
-interface SignInFormProps {
-  email: string;
-  password: string;
-}
+import SignInFormProps from '../../interfaces/SignInFormProps';
 
 const SignIn: React.FC = () => {
   const formRef = useRef<FormHandles>(null);

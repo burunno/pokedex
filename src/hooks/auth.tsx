@@ -1,25 +1,12 @@
 import React, { createContext, useCallback, useState, useContext } from 'react';
 import { usersAPI } from '../services/api';
 
-interface UserProps {
-  id: string;
-  name: string;
-}
-
-interface SignInProps {
-  email: string;
-  password: string;
-}
+import { UserProps, SignInProps, AuthState } from '../interfaces/AuthProps';
 
 interface IProps {
   user: UserProps;
   signIn(credentials: SignInProps): Promise<void>;
   signOut(): void;
-}
-
-interface AuthState {
-  token: string;
-  user: UserProps;
 }
 
 const AuthContext = createContext<IProps>({} as IProps);

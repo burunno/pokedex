@@ -3,7 +3,7 @@ import React from 'react';
 import { Container } from './styles';
 
 import AnimationToast from './AnimationToast';
-import { ToastMessage } from '../../hooks/toasts';
+import ToastMessage from '../../interfaces/ToastsMessageProps';
 
 interface IProps {
   messages: ToastMessage[];

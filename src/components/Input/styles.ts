@@ -2,10 +2,7 @@ import styled, { css } from 'styled-components';
 
 import Tooltip from '../../components/Tooltip';
 
-interface ContainerProps {
-  isFilled: boolean;
-  isErrored?: boolean;
-}
+import ContainerProps from '../../interfaces/InputContainerProps';
 
 export const Container = styled.div<ContainerProps>`
   background: #232129;

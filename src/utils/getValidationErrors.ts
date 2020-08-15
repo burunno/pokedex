@@ -1,8 +1,6 @@
 import { ValidationError } from 'yup';
 
-interface ErrorProps {
-  [key: string]: string;
-}
+import ErrorProps from '../interfaces/ErrorProps';
 
 export default function getValidationErrors(err: ValidationError): ErrorProps {
   const validationErrors: ErrorProps = {};

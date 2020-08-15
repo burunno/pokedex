@@ -39,7 +39,7 @@ const Input: React.FC<IProps> = ({ name, icon: Icon, ...rest }) => {
       {Icon && <Icon size={20} />}
       <input onBlur={handleInputBlur} ref={inputRef} {...rest} />
       {error && (
-        <Error title={error}>
+        <Error title={error} type="error">
           <FiAlertCircle color="#f8512d" size={20} />
         </Error>
       )}

@@ -2,11 +2,7 @@ import React from 'react';
 
 import { Container } from './styles';
 
-interface CardProps {
-  name: string;
-  type: string;
-  avatar: string;
-}
+import CardProps from '../../interfaces/CardProps';
 
 const Card: React.FC<CardProps> = ({ name, type, avatar }) => {
   return (

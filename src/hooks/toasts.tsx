@@ -3,16 +3,11 @@ import { uuid } from 'uuidv4';
 
 import Toasts from '../components/Toasts';
 
+import ToastMessage from '../interfaces/ToastsMessageProps';
+
 interface IProps {
   addToast(message: Omit<ToastMessage, 'id'>): void;
   removeToast(id: string): void;
-}
-
-export interface ToastMessage {
-  id: string;
-  type?: 'success' | 'error' | 'info';
-  title: string;
-  description?: string;
 }
 
 const ToastContext = createContext<IProps>({} as IProps);

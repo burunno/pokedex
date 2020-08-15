@@ -22,10 +22,7 @@ import { useToast } from '../../hooks/toasts';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 
-interface SignUpProps {
-  email: string;
-  password: string;
-}
+import SignUpProps from '../../interfaces/SignUpProps';
 
 const SignUp: React.FC = () => {
   const formRef = useRef<FormHandles>(null);

@@ -18,14 +18,8 @@ import { useToast } from '../../hooks/toasts';
 import { PokeAPI } from '../../services/api';
 
 import Card from '../../components/Card';
-import { AnyPtrRecord } from 'dns';
 
-interface PokeProps {
-  id: number;
-  name: string;
-  avatar: string;
-  type: string;
-}
+import PokeProps from '../../interfaces/PokeProps';
 
 const Main: React.FC = () => {
   const [search, setSearch] = useState('');
@@ -99,7 +93,7 @@ const Main: React.FC = () => {
           <input
             value={search}
             onChange={event => setSearch(event?.target.value)}
-            placeholder="Pesquise um Pokemon"
+            placeholder="Pesquise um Pokémon"
           />
           <button type="button" onClick={handleSearch}>
             <FiSearch size={20} />

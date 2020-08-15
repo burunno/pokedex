@@ -1,9 +1,6 @@
 import styled, { css } from 'styled-components';
 
-interface ContainerProps {
-  type?: 'info' | 'success' | 'error';
-  hasDescription: boolean;
-}
+import ContainerProps from '../../../interfaces/ToastContainerProps';
 
 const toastType = {
   info: css`

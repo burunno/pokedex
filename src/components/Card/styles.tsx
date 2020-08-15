@@ -13,6 +13,12 @@ export const Container = styled.div`
   margin-bottom: 15px;
   position: relative;
 
+  &:hover {
+    top: -2px;
+    left: -2px;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+  }
+
   img {
     width: 150px;
     height: 150px;
